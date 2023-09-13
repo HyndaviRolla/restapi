@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cycle Rental</title>
+</head>
+<body>
+    <h1>Available Cycles for Rent</h1>
+    <ul th:each="cycle : ${availableCycles}">
+        <li th:text="${cycle.cycleName}"></li>
+    </ul>
+
+    <h1>Borrowed Cycles</h1>
+    <ul>
+        <li th:each="borrowedCycle : ${borrowedCycles}" th:text="${borrowedCycle.cycle.cycleName}"></li>
+    </ul>
+</body>
+</html>

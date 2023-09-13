@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Cycles</title>
+</head>
+<body>
+    <h1>List of Available Cycles for Rent</h1>
+
+    <ul>
+        <li th:each="cycle : ${availableCycles}">
+            <span th:text="${cycle.cycleName}"></span> -
+            <span th:text="${cycle.cycleDescription}"></span>
+            <!-- Add more fields as needed -->
+        </li>
+    </ul>
+    
+    <a th:href="@{/cycles}">Back to Cycles</a>
+</body>
+</html>

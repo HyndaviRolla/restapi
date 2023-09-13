@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Borrow Cycle</title>
+</head>
+<body>
+    <h1>Borrow Cycle</h1>
+
+    <form th:action="@{/cycles/borrow}" method="post">
+        <label for="cycleId">Cycle ID:</label>
+        <input type="text" id="cycleId" name="cycleId" required><br>
+
+        <button type="submit">Borrow Cycle</button>
+    </form>
+    
+    <p th:text="${message}"></p>
+    
+    <a th:href="@{/cycles}">Back to Cycles</a>
+</body>
+</html>

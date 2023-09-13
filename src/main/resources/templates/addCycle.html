@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Cycle for Rent</title>
+</head>
+<body>
+    <h1>Add Cycle for Rent</h1>
+
+    <form th:action="@{/cycles/add}" th:object="${cycle}" method="post">
+        <label for="cycleName">Cycle Name:</label>
+        <input type="text" id="cycleName" th:field="*{cycleName}" required><br>
+
+        <label for="cycleDescription">Cycle Description:</label>
+        <textarea id="cycleDescription" th:field="*{cycleDescription}" required></textarea><br>
+
+        <button type="submit">Add Cycle</button>
+    </form>
+    
+    <p th:text="${message}"></p>
+    
+    <a th:href="@{/cycles}">Back to Cycles</a>
+</body>
+</html>

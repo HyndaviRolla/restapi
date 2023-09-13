@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cycles Management</title>
+</head>
+<body>
+    <h1>Cycles</h1>
+      
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Stock</th>
+            <th>Borrowed</th>
+            <th>Returned</th>
+            <th>Action</th>
+            
+        </tr>
+        <tr th:each="cycle : ${cycles}">
+            <td th:text="${cycle.id}"></td>
+            <td th:text="${cycle.name}"></td>
+            <td th:text="${cycle.stock}"></td>
+             <td th:text="${cycle.vehiclesBorrowed}"></td>
+             <td th:text="${cycle.vehiclesReturned}"></td>
+            <td>
+                <form th:action="@{/cycles/borrow/{id}(id=${cycle.id})}" method="post">
+                    <input type="submit" value="Borrow" th:if="${cycle.stock > 0}">
+                </form>
+            </td>
+             <td>
+        <form th:action="@{/cycles/return/{id}(id=${cycle.id})}" method="get">
+			
+            <input type="submit" value="Return" th:if="${cycle.stock < 1000}">
+        </form>
+        </td>
+        <td>
+         <form th:action="@{/cycles/restock/{id}(id=${cycle.id})}" method="post">
+			 
+       No of vehicles to restock<input type="text" id="quantity" name="quantity" required>
+            <input type="submit" value="Restock"  >
+        </form>
+    </td>
+        </tr>
+    </table>
+
+  
+    <h2>Add Cycle</h2>
+     <form th:action="@{/cycles/add}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="stock">Stock:</label>
+    <input type="number" id="stock" name="stock" required>
+    <input type="submit" value="Add">
+</form>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cycles Management</title>
+</head>
+<body>
+    <h1>Cycles</h1>
+    
+    <table id="cycleTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Borrowed</th>
+                <th>Returned</th>
+            </tr>
+        </thead>
+        <tbody id="cycleTableBody">
+            <!-- Content will be dynamically loaded here -->
+        </tbody>
+    </table>
+
+    <h2>Add Cycle</h2>
+    <form id="addCycleForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- JavaScript for handling AJAX requests and updating the table -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to load cycles data from the API and populate the table
+            function loadCycles() {
+                fetch("/api/cycles")
+                    .then(response => response.json())
+                    .then(data => {
+                        const cycleTableBody = document.getElementById("cycleTableBody");
+                        cycleTableBody.innerHTML = ""; // Clear existing table content
+                        data.forEach(cycle => {
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+                                <td>${cycle.id}</td>
+                                <td>${cycle.name}</td>
+                                <td>${cycle.stock}</td>
+                                <td>${cycle.vehiclesBorrowed}</td>
+                                <td>${cycle.vehiclesReturned}</td>
+                            `;
+                            cycleTableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error loading cycles:", error);
+                    });
+            }
+
+            // Load cycles when the page loads
+            loadCycles();
+
+            // Handle form submission for adding a cycle
+            const addCycleForm = document.getElementById("addCycleForm");
+            addCycleForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch("/api/cycles", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Cycle added successfully, reload the table
+                    loadCycles();
+                    this.reset(); // Clear the form
+                })
+                .catch(error => {
+                    console.error("Error adding cycle:", error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

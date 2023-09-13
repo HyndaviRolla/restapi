@@ -1,0 +1,107 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Cycle Management</title>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Cycle Management</h1>-->
+
+<!--    <button id="listCycles">List Cycles</button>-->
+<!--    <div id="cycleList"></div>-->
+
+<!--    <form id="addCycleForm">-->
+<!--        <input type="text" id="name" placeholder="Cycle Name">-->
+<!--        <input type="number" id="stock" placeholder="Stock">-->
+<!--        <button type="submit">Add Cycle</button>-->
+<!--    </form>-->
+    
+<!--    <form id="restockCycleForm">-->
+<!--		  <select id="cycleSelect">-->
+       
+<!--    </select>-->
+<!--        <input type="number" id="restockQuantity" placeholder="Quantity">-->
+<!--        <button type="submit" data-action="restock">Restock Cycle</button>-->
+<!--    </form>-->
+ 
+<!--    <form id="returnCycleForm">-->
+<!--		<select id="cycleSelect">-->
+       
+<!--    </select>-->
+<!--        <button type="submit" data-action="return">Return Cycle</button>-->
+<!--    </form>-->
+<!--    <script>-->
+<!--        $(document).ready(function () {-->
+<!--            $("#listCycles").click(function () {-->
+<!--                $.get("/api/cycles", function (data) {-->
+<!--              var cycleSelect = $("#cycleSelect");-->
+<!--                    $.each(data, function (index, cycle) {-->
+<!--                        cycleList += cycle.name + " - Stock: " + cycle.stock + "<br>";-->
+<!--                    });-->
+<!--                    $("#cycleList").html(cycleList);-->
+<!--                });-->
+<!--            });-->
+
+<!--            $("#addCycleForm").submit(function (event) {-->
+<!--                event.preventDefault();-->
+<!--                var cycleData = {-->
+<!--                    name: $("#name").val(),-->
+<!--                    stock: parseInt($("#stock").val())-->
+<!--                };-->
+<!--                $.ajax({-->
+<!--                    type: "POST",-->
+<!--                    url: "/api/cycles/add",-->
+<!--                    data: JSON.stringify(cycleData),-->
+<!--                    contentType: "application/json",-->
+<!--                    success: function (response) {-->
+<!--                        alert(response);-->
+<!--                    },-->
+<!--                    error: function (error) {-->
+<!--                        alert("Error: " + error.responseText);-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+<!--        });-->
+       
+<!--        $(document).ready(function () {-->
+        
+<!--            function performAction(action, cycleId) {-->
+<!--                $.get(`/api/cycles/${action}/${cycleId}`, function (response) {-->
+<!--                    alert(response);-->
+<!--                }).fail(function (error) {-->
+<!--                    alert("Error: " + error.responseText);-->
+<!--                });-->
+<!--            }-->
+
+      
+<!--            $("#restockCycleForm").submit(function (event) {-->
+<!--                event.preventDefault();-->
+<!--              var cycleId = $("#cycleSelect").val(); -->
+<!--                var quantity = parseInt($("#restockQuantity").val());-->
+            
+<!--    if (!isNaN(cycleId) && !isNaN(quantity)) {-->
+ 
+<!--        performAction("restock", cycleId, quantity);-->
+<!--            } else {-->
+<!--                    alert("Invalid input");-->
+<!--                }-->
+<!--            }); -->
+<!--            $("#returnCycleForm").submit(function (event) {-->
+<!--                event.preventDefault();-->
+<!--                   var cycleId =   $("#returnCycleSelect").val(); -->
+<!--          if (!isNaN(cycleId)) {-->
+<!--                    performAction("return", cycleId);-->
+<!--                } else {-->
+<!--                    alert("Invalid input");-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+  
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
